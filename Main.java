@@ -1,22 +1,27 @@
 public class Main {
     public static void main(String[] args) {
 
-        StudentRegistration reg = new StudentRegistration();
+        StudentRegistration sr = new StudentRegistration();
 
+        // 1. Sukses
         try {
-            // 1. Data valid (sukses)
-            reg.register("Florentina", 19);
+            sr.register("Florentina", 20);
+        } catch (InvalidNameException | InvalidAgeException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
-            // 2. Nama kosong (error)
-            reg.register("", 20);
+        // 2. Nama kosong
+        try {
+            sr.register("", 20);
+        } catch (InvalidNameException | InvalidAgeException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
-            // 3. Umur tidak valid (error)
-            reg.register("Siti", 15);
-
-        } catch (InvalidNameException e) {
-            System.out.println("Error Nama: " + e.getMessage());
-        } catch (InvalidAgeException e) {
-            System.out.println("Error Umur: " + e.getMessage());
+        // 3. Umur tidak valid
+        try {
+            sr.register("Florentina", 15);
+        } catch (InvalidNameException | InvalidAgeException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
